@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
                        'and single order booking information from the Resmark '\
                        'Systems reservation system API'
   spec.homepage      = 'https://github.com/Mechanizoid/resmarkable'
-  spec.license       = 'GPL-3.0'
+  spec.license       = 'GPL-3.0-or-later'
 
   spec.required_ruby_version = '>= 3.4.10'
 
