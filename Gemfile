@@ -2,4 +2,5 @@
 
 source "https://rubygems.org"
 
-# gem "rails"
+# Direct bundler to read the .gemspec file
+gemspec

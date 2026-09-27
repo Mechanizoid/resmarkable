@@ -50,6 +50,9 @@ flycheck_*.el
 # undo-tree
 *.~undo-tree~
 
+# Gemfile.lock
+Gemfile.lock
+
 *.gem
 *.rbc
 /.config
