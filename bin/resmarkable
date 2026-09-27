@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
-require "resmarkable"
+
+require 'resmarkable'
 
 # Simple Hello World with ARGV processing
 puts "Hello #{ARGV[0] || 'World'}!"
