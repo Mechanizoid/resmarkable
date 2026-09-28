@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   # Development dependencies
   spec.add_development_dependency  'minitest', '~> 6.0'
   
-  spec.bindir        = 'bin'
+  spec.bindir        = 'exe'
   spec.executables   = ['resmarkable']
   spec.require_paths = ['lib']
 end
