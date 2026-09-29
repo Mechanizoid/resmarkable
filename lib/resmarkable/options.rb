@@ -38,6 +38,8 @@ module Resmarkable
     # rubocop:disable Metrics/MethodLength
     def parse_options(argv)
       opt_parser = OptionParser.new do |parser|
+        parser.require_exact = true
+
         parser.banner = 'Usage: resmarkable [options]'
 
         parser.on('-C', '--curses-mode', 'Enable curses mode') do
