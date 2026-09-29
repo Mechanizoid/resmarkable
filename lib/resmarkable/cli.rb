@@ -29,7 +29,7 @@ module Resmarkable
     end
 
     def run
-      puts 'Resmarkable says hi!'
+      puts "Welcome to Resmarkable #{Resmarkable::VERSION}!"
       puts "user name: #{@options.user_name}, api_key: #{@options.api_key}"
       puts "curses-mode enabled: #{@options.curses_mode}"
       puts @options.remaining_arguments
