@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License along with
 # this program. If not, see <https://www.gnu.org/licenses/>
 
+require_relative './options'
+
 module Resmarkable
   # Initializes and manages the CLI interface that the user interacts with
   class CLI
@@ -23,17 +25,13 @@ module Resmarkable
     end
 
     def initialize(argv, env)
-      @argv = argv
-      # During development, program will read API credentials from environment
-      # variables
-      @resmark_user_name = env['RESMARK_USER_NAME']
-      @resmark_api_key = env['RESMARK_API_KEY']
+      @options = Resmarkable::Options.new(argv, env)
     end
 
     def run
       puts 'Resmarkable says hi!'
-      puts "user name: #{@resmark_user_name}, api_key: #{@resmark_api_key}"
-      puts @argv
+      puts "user name: #{@options.user_name}, api_key: #{@options.api_key}"
+      puts @options.remaining_arguments
     end
   end
 end
