@@ -15,11 +15,11 @@
 # You should have received a copy of the GNU General Public License along with
 # this program. If not, see <https://www.gnu.org/licenses/>
 
-
 # TODO: Require external dependencies / gem standard libraries
 
 # TODO: Require internal project files (relative to this file's directory)
-require_relative "resmarkable/version"
+require_relative 'resmarkable/version'
+require_relative 'resmarkable/cli'
 
 # TODO: Define the core namespace module
 module Resmarkable

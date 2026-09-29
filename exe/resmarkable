@@ -17,20 +17,5 @@
 # this program. If not, see <https://www.gnu.org/licenses/>
 
 require 'resmarkable'
-require 'optparse'
 
-# Simple Hello World with ARGV processing
-
-options = {verbose: false}
-
-OptionParser.new do |parser|
-  parser.banner = "Usage: #{$PROGRAM_NAME} [options]"
-
-  parser.on('-v', '--[no-]verbose', 'Run in verbose mode') do |v|
-    options[:verbose] = v
-  end
-end.parse!
-
-puts 'Welcome to Resmarkable!'
-p options
-p ARGV
+Resmarkable::CLI.start(ARGV)
