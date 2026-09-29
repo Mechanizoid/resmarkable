@@ -31,6 +31,7 @@ module Resmarkable
     def run
       puts 'Resmarkable says hi!'
       puts "user name: #{@options.user_name}, api_key: #{@options.api_key}"
+      puts "curses-mode enabled: #{@options.curses_mode}"
       puts @options.remaining_arguments
     end
   end
