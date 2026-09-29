@@ -5,6 +5,8 @@ source "https://rubygems.org"
 # Direct bundler to read the .gemspec file
 gemspec
 
+gem "colorize", "~> 1.1"
+
 gem "curses", "~> 1.7"
 
 gem "faraday", "~> 2.14"

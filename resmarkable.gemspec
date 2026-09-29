@@ -21,8 +21,9 @@ Gem::Specification.new do |spec|
   spec.files = Dir['lib/**/*.rb', 'bin/*', 'README.md', 'Gemfile']
 
   # Dependencies
-  spec.add_dependency              'curses',  '~> 1.7'
-  spec.add_dependency              'faraday', '~> 2.14'
+  spec.add_dependency              'colorize', '~> 1.1'
+  spec.add_dependency              'curses',   '~> 1.7'
+  spec.add_dependency              'faraday',  '~> 2.14'
 
   # Development dependencies
   spec.add_development_dependency  'minitest', '~> 6.0'
