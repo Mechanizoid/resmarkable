@@ -18,4 +18,4 @@
 
 require 'resmarkable'
 
-Resmarkable::CLI.start(ARGV)
+Resmarkable::CLI.start(ARGV, ENV)

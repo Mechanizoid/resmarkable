@@ -18,16 +18,16 @@
 module Resmarkable
   # Initializes and manages the CLI interface that the user interacts with
   class CLI
-    def self.start(argv)
-      new(argv).run
+    def self.start(argv, env)
+      new(argv, env).run
     end
 
-    def initialize(argv)
+    def initialize(argv, env)
       @argv = argv
       # During development, program will read API credentials from environment
       # variables
-      @resmark_user_name = ENV['RESMARK_USER_NAME']
-      @resmark_api_key = ENV['RESMARK_API_KEY']
+      @resmark_user_name = env['RESMARK_USER_NAME']
+      @resmark_api_key = env['RESMARK_API_KEY']
     end
 
     def run
