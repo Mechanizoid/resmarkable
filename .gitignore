@@ -1,0 +1,26 @@
+# Emacs autosaves
+*~
+\#*\#
+.\#*
+
+# Build artifacts
+*.gem
+
+# .env files
+# WARNING: be careful not to commit sensitive information like API credentials!
+# All secrets should be securely stored or kept in a .env file or .env* subdir
+# during development.
+.env*
+
+# Gemfile.lock
+Gemfile.lock
+
+# Gem-specific directives created by `bundle gem` command
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
