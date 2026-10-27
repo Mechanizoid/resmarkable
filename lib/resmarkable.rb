@@ -15,4 +15,6 @@ module Resmarkable
   # Default API base path
   BASE_PATH = "/public/api"
 
+  # Raise NameError if users tries to access internal parts of this gem
+  private_constant :Token
 end
