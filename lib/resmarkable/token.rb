@@ -5,6 +5,7 @@
 
 require "faraday"
 require "pathname"
+require "time"
 require "uri"
 
 module Resmarkable
@@ -32,7 +33,7 @@ module Resmarkable
         @timestamp = nil
       else
         @value = saved_token[:value]
-        @timestamp = saved_token[:timestamp]
+        @timestamp = Time.parse(saved_token[:timestamp])
       end
     end
 
