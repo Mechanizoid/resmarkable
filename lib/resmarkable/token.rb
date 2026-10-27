@@ -53,6 +53,12 @@ module Resmarkable
 
       @timestamp = Time.now
       @value = response.body
+    rescue Faraday::ConnectionFailed => e
+      raise Resmarkable::ConnectionFailed, "Connection with server failed: #{e.message}"
+    rescue Faraday::TimeoutError => e
+      raise Resmarkable::TimeoutError, "Remote server took too long to respond: #{e.message}"
+    rescue Faraday::SSLError => e
+      raise Resmarkable::SSLError, "SSL error: #{e.message}"
     end
 
     def should_fetch?

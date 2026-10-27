@@ -4,10 +4,10 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
 require_relative "resmarkable/version"
+require_relative "resmarkable/errors"
 require_relative "resmarkable/client"
 
 module Resmarkable
-  class Error < StandardError; end
   # Default URL hosts
   PRODUCTION_HOST = "app.resmarksystems.com"
   SANDBOX_HOST = "sandbox.resmarksystems.com"
