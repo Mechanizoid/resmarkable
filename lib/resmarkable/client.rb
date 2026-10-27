@@ -6,10 +6,13 @@
 require "uri"
 
 require_relative "token"
+require_relative "client/reports"
 
 module Resmarkable
   # Entry point for using API wrapper client
   class Client
+    include Reports
+
     attr_accessor :user, :key, :sandbox, :host, :path
 
     def initialize(user:, key:, sandbox: true, token: nil)
@@ -21,11 +24,6 @@ module Resmarkable
                          path: path, saved_token: token)
       @uri = URI::HTTPS.build(host: @host, path: @path.to_s)
       @connection = create_connection
-    end
-
-    # Test method
-    def get_single_order(id)
-      @connection.get("order/#{id}")
     end
 
     # Return API token value and timestamp to user (facilitating storage
@@ -58,5 +56,7 @@ module Resmarkable
         builder.response :json
       end
     end
+
+    private_constant :Reports
   end
 end
