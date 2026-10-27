@@ -12,6 +12,10 @@
 # during development.
 .env*
 
+# local configuration
+.irbrc
+.irb.d/*
+
 # Gemfile.lock
 Gemfile.lock
 
