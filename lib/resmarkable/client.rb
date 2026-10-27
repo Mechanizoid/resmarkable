@@ -15,18 +15,21 @@ module Resmarkable
     def initialize(user:, key:, sandbox: true, token: nil)
       @user = user
       @key = key
-      @sandbox = sandbox
       @host = sandbox ? SANDBOX_HOST : PRODUCTION_HOST
       @path = BASE_PATH
-      @token = Token.new(
-        user: user,
-        key: key,
-        host: host,
-        path: path,
-        saved_token: token
-      )
+      @token = Token.new(user: user, key: key, host: host,
+                         path: path, saved_token: token)
+      @uri = URI::HTTPS.build(host: @host, path: @path.to_s)
+      @connection = create_connection
     end
 
+    # Test method
+    def get_single_order(id)
+      @connection.get("order/#{id}")
+    end
+
+    # Return API token value and timestamp to user (facilitating storage
+    # and reuse of tokens, as a token is valid for 24 hours)
     def token
       value = @token.value
       {
@@ -36,11 +39,24 @@ module Resmarkable
     end
 
     def say_hi
-      uri = URI::HTTPS.build(host: @host, path: @path.to_s)
-
       puts "Hi, #{@user}! You are accessing the Resmark Systems API."
-      puts "Base URL: #{uri}."
+      puts "Base URL: #{@uri}."
       puts "Your API key is #{@key}."
+    end
+
+    private
+
+    def create_connection
+      Faraday.new(url: @uri) do |builder|
+        # Call Token.value on each request to get a valid API token
+        builder.request :authorization, 'Bearer', -> { @token.value }
+
+        # Set the Content-Type header to application/json on each request
+        builder.request :json
+
+        # Parse JSON response bodies
+        builder.response :json
+      end
     end
   end
 end
