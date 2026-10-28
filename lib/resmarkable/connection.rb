@@ -15,17 +15,18 @@ module Resmarkable
     end
 
     def get(path, query = nil, headers = nil)
-      request(:get, path, query, headers)
+      request(:get, path, query: query, headers: headers)
     end
 
     def post(path, body = nil, headers = nil)
-      request(:post, path, body, headers)
+      request(:post, path, body: body, headers: headers)
     end
 
     private
 
-    def request(http_verb, path, payload = nil, headers = nil)
+    def request(http_verb, path, query: nil, payload: nil, headers: nil)
       @connection.public_send(http_verb, path) do |req|
+        req.params = query unless query.nil?
         req.body = payload unless payload.nil?
         req.headers = headers unless headers.nil?
       end
