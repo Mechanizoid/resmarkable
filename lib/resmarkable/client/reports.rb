@@ -8,18 +8,23 @@ module Resmarkable
     # :nodoc:
     # Mixin module for reports endpoints
     module Reports
-      def order (
-            limit: nil,
-            page: nil,
-            from_created_date: nil,
-            to_created_date: nil
-          )
-        query = {}
+      # Order API endpoint (returns a paginated list of orders)
+      # rubocop:disable-next Metrics/MethodLength
+      def order(**parameters)
+        named_parameters = {
+          limit: nil,
+          page: nil,
+          ids: nil,
+          confirmationIds: nil,
+          fromCreatedDate: nil,
+          toCreatedDate: nil,
+          fromModifiedDate: nil,
+          toModifiedDate: nil,
+          referenceId: nil,
+          sortOrder: nil
+        }
 
-        query[:limit] = limit unless limit.nil?
-        query[:page] = page unless page.nil?
-        query[:fromCreatedDate] = from_created_date unless from_created_date.nil?
-        query[:toCreatedDate] = to_created_date unless to_created_date.nil?
+        query = named_parameters.merge(parameters).compact
 
         @connection.get("order", query)
       end
