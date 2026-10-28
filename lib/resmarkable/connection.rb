@@ -19,7 +19,7 @@ module Resmarkable
     end
 
     def post(path, body = nil, headers = nil)
-      request(:post, path, body: body, headers: headers)
+      request(:post, path, payload: body, headers: headers)
     end
 
     private
