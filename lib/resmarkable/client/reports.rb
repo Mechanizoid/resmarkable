@@ -8,6 +8,19 @@ module Resmarkable
     # :nodoc:
     # Mixin module for Reports endpoints
     module Reports
+      # Manifest Summary endpoint
+      def manifest_summary(from = nil, to = nil, **parameters)
+        named_parameters = {
+          from: from,
+          to: to,
+          productId: nil,
+          productName: nil
+        }
+
+        parameters = named_parameters.merge(parameters).compact
+
+        @connection.post("report/manifest/summary", parameters)
+      end
     end
   end
 end
