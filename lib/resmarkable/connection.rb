@@ -29,14 +29,14 @@ module Resmarkable
         req.body = payload unless payload.nil?
         req.headers = headers unless headers.nil?
       end
-    rescue Faraday::ConnectionFailed => e
-      raise ConnectionFailed, e.message
+    rescue Faraday::ClientError => e
+      raise ClientError.new(exception: e)
+    rescue Faraday::ServerError => e
+      raise ServerError.new(exception: e)
     rescue Faraday::TimeoutError => e
-      raise TimeoutError, e.message
-    rescue Faraday::SSLError => e
-      raise SSLError, e.message
-    rescue Faraday::Error => e
-      raise NetworkError, e.message
+      raise TimeoutError.new(exception: e)
+    rescue Faraday::ConnectionFailed, Faraday::SSLError => e
+      raise NetworkError("Target API server is unreachable: #{e.message}")
     end
 
     def create_connection
@@ -49,8 +49,10 @@ module Resmarkable
 
         # Parse JSON response bodies
         builder.response :json
+
+        # Raise errors on status code 4xx or 5xx
+        builder.response :raise_error
       end
     end
-
   end
 end
