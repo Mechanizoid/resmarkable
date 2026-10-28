@@ -5,6 +5,7 @@
 
 require "uri"
 
+require_relative "connection"
 require_relative "token"
 require_relative "client/reports"
 
@@ -23,7 +24,7 @@ module Resmarkable
       @token = Token.new(user: user, key: key, host: host,
                          path: path, saved_token: token)
       @uri = URI::HTTPS.build(host: @host, path: @path.to_s)
-      @connection = create_connection
+      @connection = Connection.new(host: @host, path: @path, token: @token)
     end
 
     # Return API token value and timestamp to user (facilitating storage
@@ -40,21 +41,6 @@ module Resmarkable
       puts "Hi, #{@user}! You are accessing the Resmark Systems API."
       puts "Base URL: #{@uri}."
       puts "Your API key is #{@key}."
-    end
-
-    private
-
-    def create_connection
-      Faraday.new(url: @uri) do |builder|
-        # Call Token.value on each request to get a valid API token
-        builder.request :authorization, 'Bearer', -> { @token.value }
-
-        # Set the Content-Type header to application/json on each request
-        builder.request :json
-
-        # Parse JSON response bodies
-        builder.response :json
-      end
     end
 
     private_constant :Reports
