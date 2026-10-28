@@ -7,11 +7,13 @@ require "uri"
 
 require_relative "connection"
 require_relative "token"
+require_relative "client/orders"
 require_relative "client/reports"
 
 module Resmarkable
   # Entry point for using API wrapper client
   class Client
+    include Orders
     include Reports
 
     attr_accessor :user, :key, :sandbox, :host, :path
@@ -43,6 +45,6 @@ module Resmarkable
       puts "Your API key is #{@key}."
     end
 
-    private_constant :Reports
+    private_constant :Orders, :Reports
   end
 end
