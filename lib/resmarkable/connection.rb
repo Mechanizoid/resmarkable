@@ -21,6 +21,10 @@ module Resmarkable
       request(:post, path, payload: body, headers: headers)
     end
 
+    def delete(path, query = nil, headers = nil)
+      request(:delete, path, query: query, headers: headers)
+    end
+
     private
 
     def request(http_verb, path, query: nil, payload: nil, headers: nil)
