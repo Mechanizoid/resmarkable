@@ -11,7 +11,6 @@ module Resmarkable
     def initialize(host:, path:, token:)
       @uri = URI::HTTPS.build(host: host, path: path)
       @token = token
-      @connection = create_connection
     end
 
     def get(path, query = nil, headers = nil)
@@ -25,7 +24,7 @@ module Resmarkable
     private
 
     def request(http_verb, path, query: nil, payload: nil, headers: nil)
-      @connection.public_send(http_verb, path) do |req|
+      connection.public_send(http_verb, path) do |req|
         req.params = query unless query.nil?
         req.body = payload unless payload.nil?
         req.headers = headers unless headers.nil?
@@ -40,8 +39,8 @@ module Resmarkable
       raise NetworkError("Target API server is unreachable: #{e.message}")
     end
 
-    def create_connection
-      Faraday.new(url: @uri) do |builder|
+    def connection
+      @connection ||= Faraday.new(url: @uri) do |builder|
         # Call Token.value on each request to get a valid API token
         builder.request :authorization, 'Bearer', -> { @token.value }
 
