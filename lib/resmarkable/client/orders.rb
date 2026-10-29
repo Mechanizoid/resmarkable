@@ -29,8 +29,30 @@ module Resmarkable
         @connection.get("order", query)
       end
 
+      # Single Order
       def single_order(id)
         @connection.get("order/#{id}")
+      end
+
+      # Create New Order
+      def create_order(id:,
+                       order_id: nil,
+                       billing: nil,
+                       reference_id: nil,
+                       **parameters
+                      )
+        payload = {
+          id: id,
+          orderId: order_id,
+          billing: billing,
+          referenceId: reference_id,
+          disableNotification: nil,
+          disablePendingOrderNotification: nil,
+          disablePendingOrderNotificationResponse: nil,
+          disableConfirmationEmail: nil
+        }.merge(parameters).compact
+
+        connection.post("order", payload)
       end
     end
   end
