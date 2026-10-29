@@ -33,6 +33,22 @@ module Resmarkable
         @connection.get("report/order/transactionDate", query)
       end
 
+      # Mailing List by Order
+      def mailing_list_by_order(**parameters)
+        query = {
+          from: nil,
+          to: nil,
+          productId: nil,
+          class: nil,
+          subscribed: nil,
+          customerType: nil,
+          dateMode: nil,
+          skip: nil
+        }.merge(parameters).compact
+
+        @connection.get("report/mailingListbyOrder/productStartDate", query)
+      end
+
       # Manifest Summary
       def manifest_summary(from: nil, to: nil, product_id: nil,
                            product_name: nil, **parameters)
