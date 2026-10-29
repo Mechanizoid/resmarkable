@@ -18,6 +18,21 @@ module Resmarkable
         @connection.get("report/accrual/transactionDate", query)
       end
 
+      # Transaction Date Details
+      def transaction_date(from: nil, to: nil, **parameters)
+        query = {
+          from: from,
+          to: to,
+          orderIds: nil,
+          confirmationIds: nil,
+          productNumbers: nil,
+          fromProductStartDate: nil,
+          toProductStartDate: nil
+        }.merge(parameters).compact
+
+        @connection.get("report/order/transactionDate", query)
+      end
+
       # Manifest Summary
       def manifest_summary(from: nil, to: nil, product_id: nil,
                            product_name: nil, **parameters)
