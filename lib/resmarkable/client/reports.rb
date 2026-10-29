@@ -19,17 +19,16 @@ module Resmarkable
       end
 
       # Manifest Summary
-      def manifest_summary(from = nil, to = nil, **parameters)
-        named_parameters = {
+      def manifest_summary(from: nil, to: nil, product_id: nil,
+                           product_name: nil, **parameters)
+        payload = {
           from: from,
           to: to,
-          productId: nil,
-          productName: nil
-        }
+          productId: product_id,
+          productName: product_name
+        }.merge(parameters).compact
 
-        parameters = named_parameters.merge(parameters).compact
-
-        @connection.post("report/manifest/summary", parameters)
+        @connection.post("report/manifest/summary", payload)
       end
     end
   end
