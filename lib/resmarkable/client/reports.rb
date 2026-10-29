@@ -8,7 +8,17 @@ module Resmarkable
     # :nodoc:
     # Mixin module for Reports endpoints
     module Reports
-      # Manifest Summary endpoint
+      # Accrual Date Details
+      def accrual_date(from: nil, to: nil, **parameters)
+        query = {
+          from: from,
+          to: to
+        }.merge(parameters).compact
+
+        @connection.get("report/accrual/transactionDate", query)
+      end
+
+      # Manifest Summary
       def manifest_summary(from = nil, to = nil, **parameters)
         named_parameters = {
           from: from,
