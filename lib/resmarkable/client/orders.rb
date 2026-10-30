@@ -74,6 +74,21 @@ module Resmarkable
 
         @connection.delete("order/#{id}/item/#{item_id}", query)
       end
+
+      # Cancel Participant
+      def cancel_participant(id:, item_id:, participant_id:, apply_fee: nil)
+        query = {
+          id: id,
+          itemId: item_id,
+          participantId: participant_id,
+          applyCancellationFee: apply_fee
+        }.compact
+
+        @connection.delete(
+          "order/#{id}/item/#{itemId}/participant/#{participantId}",
+          query
+        )
+      end
     end
   end
 end
