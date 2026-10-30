@@ -54,6 +54,15 @@ module Resmarkable
 
         connection.post("order", payload)
       end
+
+      # Cancel Order
+      def cancel_order(id, apply_fee: nil)
+        query = {
+          applyCancellationFee: apply_fee
+        }.compact
+
+        @connection.delete("order/#{id}", query)
+      end
     end
   end
 end
