@@ -63,6 +63,17 @@ module Resmarkable
 
         @connection.delete("order/#{id}", query)
       end
+
+      # Cancel Inventory Item
+      def cancel_order_item(id, item_id, apply_fee: nil)
+        query = {
+          id: id,
+          itemId: item_id,
+          applyCancellationFee: apply_fee
+        }.compact
+
+        @connection.delete("order/#{id}/item/#{item_id}", query)
+      end
     end
   end
 end
