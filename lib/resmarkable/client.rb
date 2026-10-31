@@ -9,12 +9,14 @@ require_relative "connection"
 require_relative "token"
 require_relative "client/orders"
 require_relative "client/reports"
+require_relative "client/carts"
 
 module Resmarkable
   # Entry point for using API wrapper client
   class Client
     include Orders
     include Reports
+    include Carts
 
     attr_accessor :user, :key, :sandbox, :host, :path
 
