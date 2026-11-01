@@ -26,6 +26,11 @@ module Resmarkable
       def retrieve_cart(id)
         @connection.get("cart/#{id}")
       end
+
+      # Delete a cart
+      def delete_cart(id)
+        @connection.delete("cart/#{id}")
+      end
     end
   end
 end
